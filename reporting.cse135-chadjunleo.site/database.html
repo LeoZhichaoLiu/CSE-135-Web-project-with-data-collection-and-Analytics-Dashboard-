@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Report</title>
+  <link rel = "icon" href = "images/favicon.png">
+  <!--Script Reference[1]-->
+  <script nonce="undefined" src="https://cdn.zinggrid.com/zinggrid.min.js"></script>
+</head>
+  
+<body>
+  <zing-grid id="static-grid" caption="Static Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="performance-grid" caption="Performance Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="load-grid" caption="Load Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="unload-grid" caption="Unload Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="movement-grid" caption="Mouse Movement Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="click-grid" caption="Mouse Click Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="scroll-grid" caption="Scroll Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="key-up-grid" caption="Key Up Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="key-down-grid" caption="Key Down Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  <zing-grid id="idle-grid" caption="Idle Activity Data" sort search pager page-size="10" page-size-options="10,20,30" layout="row" viewport-stop></zing-grid>
+  
+  <script>
+    // window:load event for Javascript to run after HTML
+    // because this Javascript is injected into the document head
+    window.addEventListener('load', () => {
+      const staticGrid = document.querySelector('#static-grid');
+      const performanceGrid = document.querySelector('#performance-grid');
+      const loadGrid = document.querySelector('#load-grid');
+      const unloadGrid = document.querySelector('#unload-grid');
+      const movementGrid = document.querySelector('#movement-grid');
+      const clickGrid = document.querySelector('#click-grid');
+      const scrollGrid = document.querySelector('#scroll-grid');
+      const keyUpGrid = document.querySelector('#key-up-grid');
+      const keyDownGrid = document.querySelector('#key-down-grid');
+      const idleGrid = document.querySelector('#idle-grid');
+      staticGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/static', staticGrid);
+      });
+      performanceGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/performance', performanceGrid);
+      });
+      loadGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/load', loadGrid);
+      });
+      unloadGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/unload', unloadGrid);
+      });
+      movementGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/mouse_movement', movementGrid);
+      });
+      clickGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/mouse_click', clickGrid);
+      });
+      scrollGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/scroll', scrollGrid);
+      });
+      keyUpGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/key_up', keyUpGrid);
+      });
+      keyDownGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/key_down', keyDownGrid);
+      });
+      idleGrid.executeOnLoad(() => {
+        sendRequest('https://collector.cse135-chadjunleo.site/api/activity/idle', idleGrid);
+      });
+    });
+    
+    function sendRequest(requestLocation, grid) {
+  
+      let request = new XMLHttpRequest();
+      request.addEventListener('load', (e) => {
+        console.log(eval(request.response));
+        grid.setAttribute('data', request.response);
+      });
+      
+      request.addEventListener('error', (e) => {
+        console.log('There was an error sending the activity info, retrying...');
+        setTimeout(sendRequest(requestLocation, payload), 10000);
+      });
+      
+      request.addEventListener('abort', (e) => {
+        console.log('Activity Info Aborted!');
+      });
+      
+      request.open('GET', requestLocation);
+        
+      request.send();
+    }
+  </script>
+</body>
+</html>
+

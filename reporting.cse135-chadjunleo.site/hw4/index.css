@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-color: #00629B;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+header h1 {
+  margin: 10px 0 10px 10px;
+}
+
+h2 {
+  margin-left: 10px;
+  font-size: 30px;
+}
+
+nav > ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+p.err {
+  font-size: 20px;
+  color: red;
+  margin-left: 10px;
+}
+
+
+#login-container {
+  background-color: #D3D3D3;
+  margin-left: 10px;
+  display: inline-block;
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+}
+
+#login-container h3 {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+#login-container label  {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+#login-container input {
+  margin: 3px 0 3px 10px;
+  font-size: 20px;
+}
+
+#login-btn {
+  margin: 0;
+  background-color: #00629B;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+#navbar a {
+  color: white;
+}
+
+time {
+  margin-left: 10px;
+}
+
+nav {
+  margin-right: 10px;
+}
+footer {
+  margin-left: 10px;
+}
+
