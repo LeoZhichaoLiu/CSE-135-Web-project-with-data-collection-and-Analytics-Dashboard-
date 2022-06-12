@@ -1,6 +1,8 @@
 # CSE-135-Web-project-with-data-collection-and-Analytics-Dashboard-
 Using Digital Ocean to create the Droplet with Ubuntu Distribution and Apache web server. 
+
 Using MySQL to store data.
+
 Using GoDaddy to build DNS system.
 Using SSL certificate to encrypt HTTP traffic.
 Having 404 fault page and robot.txt.
